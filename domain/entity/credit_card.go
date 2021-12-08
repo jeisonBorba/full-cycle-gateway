@@ -23,7 +23,7 @@ func NewCreditCard(number string, name string, expirationMonth int, expirationYe
 		cvv:             cvv,
 	}
 
-	err := creditCard.isValid()
+	err := creditCard.IsValid()
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func NewCreditCard(number string, name string, expirationMonth int, expirationYe
 	return creditCard, nil
 }
 
-func (cc *CreditCard) isValid() error {
+func (cc *CreditCard) IsValid() error {
 	err := cc.validateNumber()
 	if err != nil {
 		return err

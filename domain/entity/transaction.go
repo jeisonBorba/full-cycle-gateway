@@ -2,6 +2,11 @@ package entity
 
 import "errors"
 
+const (
+	REJECTED = "rejected"
+	APPROVED = "approved"
+)
+
 type Transaction struct {
 	ID           string
 	AccountID    string
@@ -15,7 +20,7 @@ func NewTransaction() *Transaction {
 	return &Transaction{}
 }
 
-func (t *Transaction) isValid() error {
+func (t *Transaction) IsValid() error {
 	if t.Amount > 1000 {
 		return errors.New("you dont have limit for this transaction")
 	}
@@ -26,6 +31,6 @@ func (t *Transaction) isValid() error {
 	return nil
 }
 
-func (t *Transaction) setCreditCard(card CreditCard) {
+func (t *Transaction) SetCreditCard(card CreditCard) {
 	t.CreditCard = card
 }
