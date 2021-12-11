@@ -1,6 +1,6 @@
 const ironConfig = {
-  password: "01234567890123456789012345678912345",
-  cookieName: "fullcycle-session",
+  password: process.env.COOKIE_KEY,
+  cookieName: process.env.COOKIE_NAME,
   cookieOptions: {
     // the next line allows to use the session in non-https environments like
     // Next.js dev mode (http://localhost:3000)
