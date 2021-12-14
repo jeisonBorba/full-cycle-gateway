@@ -13,6 +13,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: wesleywillians/imersao5-frontend:latest
+        image: jeisonborba/fullcycle-frontend:latest
         ports:
         - containerPort: 3000

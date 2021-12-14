@@ -13,11 +13,7 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: wesleywillians/imersao5-gateway
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        image: jeisonborba/fullcycle-gateway
         envFrom:
         - secretRef:
             name: gateway
