@@ -12,38 +12,30 @@
 !includeurl CLOUDOGUURL/tools/grafana.puml
 AddRelTag("async", $lineStyle = DashedLine())
 
-
 SHOW_PERSON_PORTRAIT()
 
-System_Ext(client,"Client","Sistema que solicita o pagamento")
-Person(user,"Administrador","Acompanha as transações de pagamento")
-Person(superadmin,"Administrador da Gateway","Acompanha as métricas de transações de pagamento")
+System_Ext(client, "Client", "System requesting payment")
+Person(user, "Administrator", "Track payment transactions")
+Person(superadmin, "Gateway Administrator", "Track payment transaction metrics")
 
 System_Boundary(gateway, "Full Cycle Gateway"){
-Container(backend,"Backend","Nest.js","Sistema que recebe a solicitação de pagamento", $sprite = "nodejs")
-
-Container(processor,"Processador de pagamentos","Go","Processa pagamento: autorizando ou rejeitando",$sprite = "go")
-
-ContainerDb(mysql_backend,"Banco de dados","MySQL","Armazena as transações de pagamento",$sprite = "mysql")
-ContainerDb(mysql_processor,"Banco de dados","MySQL","Armazena as transações de pagamento",$sprite = "mysql")
-
-Container(prometheus,"Métricas de pagamento","Prometheus","Armazena métricas de pagamento", $sprite = "prometheus")
-Rel(prometheus,processor,"Consume métricas de pagamento em","HTTP/TXT")
-
-Container(grafana,"Dashboard de métricas","Grafana","Exibe métricas de pagamentos", $sprite = "grafana")
-Rel(grafana,prometheus,"Consume métricas de pagamento em","PromQL")
-
-Rel(superadmin,grafana,"Consume métricas de pagamento em","HTTPS")
-
-Container(frontend,"Painel de Controle","Next.js","Monitora as transações de pagamento e seus status", $sprite = "react")
-Rel(user,frontend,"solicita dados das transações em","HTTPS")
-Rel(frontend,backend,"Recupera informações de pagamento","HTTPS/JSON")
-
-Rel(processor,mysql_processor,"Recebe dados do pagamento","MySQL Protocol")
-
-Rel(backend,mysql_backend,"Recebe dados do pagamento","MySQL Protocol")
-Rel(client,backend,"solicita pagamento em","HTTP/JSON")
-Rel(backend,processor,"envia dados de pagamento para","Através do Kafka pelo tópico transactions",$tags = "async")
-Rel(processor,backend,"envia resultado da transação","Através do Kafka pelo tópico transactions_result",$tags = "async")
+	Container(backend, "Backend", "Nest.js", "System receiving payment requests", $sprite = "nodejs")
+	Container(processor, "Payments processor", "Go", "Process payment: authorizing or rejecting", $sprite = "go")
+	ContainerDb(mysql_backend, "Database", "MySQL", "Store payment transactions", $sprite = "mysql")
+	ContainerDb(mysql_processor, "Database", "MySQL", "Store payment transactions", $sprite = "mysql")
+	Container(prometheus, "Payment metrics", "Prometheus", "Strore payment metrics", $sprite = "prometheus")
+	Container(grafana, "Metrics dashboard", "Grafana", "Display payment metrics", $sprite = "grafana")
+	Container(frontend,"Control panel", "Next.js", "Monitor payment transactions and their status", $sprite = "react")
+	
+	Rel(prometheus, processor, "Consume payment metrics on:", "HTTP/TXT")
+	Rel(grafana, prometheus, "Consume payment metrics on:", "PromQL")
+	Rel(superadmin, grafana, "Consume payment metrics on:", "HTTPS")
+	Rel(user, frontend, "Request transactions data on:", "HTTPS")
+	Rel(frontend, backend, "Retrieve payment information from:","HTTPS/JSON")
+	Rel(processor, mysql_processor, "Receive payment data from:", "MySQL Protocol")
+	Rel(backend, mysql_backend, "Receive payment data from:", "MySQL Protocol")
+	Rel(client, backend, "Request payment on:", "HTTP/JSON")
+	Rel(backend, processor, "Send payment data to:", "Through Kafka: transactions topic",$tags = "async")
+	Rel(processor, backend, "Send transactions result to:", "Through Kafka: transactions_result topic", $tags = "async")
 }
 @enduml
