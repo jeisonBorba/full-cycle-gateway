@@ -7,6 +7,17 @@ This repository contains the source code developed during the "Imersão Fullcycl
 
 Installation instructions can be found in the README.md file of each project.
 
+## Technologies used:
+
+- [Golang][golang]
+- [Nestjs][nestjs]
+- [Nextjs][nextjs]
+- [Kafka][kafka]
+- [Docker][docker]
+- [Kubernetes][kubernetes]
+- [Mysql][mysql]
+
+
 ## Recommended order of execution
 
 * Apache Kafka
