@@ -1,5 +1,5 @@
 <p align="center">
-	[<img src="../img/golang.svg" width="72"/>](Golang)
+	<img src="../img/golang.svg" width="72"/>
 </p>
 
 ## Description
