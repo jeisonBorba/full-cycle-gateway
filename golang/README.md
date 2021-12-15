@@ -1,5 +1,5 @@
 <p align="center">
-	![Golang](/img/golang.svg)
+	![Golang](../img/golang.svg)
 </p>
 
 ## Description
