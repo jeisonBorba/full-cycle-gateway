@@ -1,5 +1,5 @@
 <p align="center">
-	![Nextjs](img/nextjs.png)
+	<img src="../img/nextjs.png" width="72"/>
 </p>
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
