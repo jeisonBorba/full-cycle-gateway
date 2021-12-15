@@ -1,5 +1,5 @@
 <p align="center">
-	![Nesyjs](img/nestjs.svg)
+	<img src="../img/nestjs.svg" width="72"/>
 </p>
 
 
